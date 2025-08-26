@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: aichatbot
+    env: java
+    plan: free
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: APP_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_ENDPOINT
+        value: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
