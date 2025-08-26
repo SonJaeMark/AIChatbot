@@ -1,14 +1,14 @@
-# Use official OpenJDK image
-FROM openjdk:17-jdk-slim
+# Use secure and up-to-date JRE image
+FROM eclipse-temurin:17-jre-jammy
 
-# Set working directory
 WORKDIR /app
 
-# Copy the jar file built by Maven/Gradle into container
+# Copy the JAR file
 COPY target/AIChatbot-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose port
 EXPOSE 8080
 
-# Run the jar
+# Run as non-root for security
+USER 1001
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
